@@ -1,0 +1,48 @@
+
+<app-navbar></app-navbar>
+<!-- <div *ngIf="products.length>0" class="Home-Main-div"> -->
+<div *ngIf="outStock.length>0"  class="OutStock-Main-div">
+
+    <h3>Out Of Stocks</h3>
+    <br>
+    <br>
+
+    <button type="button" routerLink="/addOutStock" class="btn btn-primary outStockAddButton">Add to List</button>
+
+<div class="Home-table">
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <!-- <th scope="col">P.Id</th> -->
+        <th scope="col">Product Name</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Category</th>
+        <!-- <th scope="col">Price</th> -->
+        <th scope="col">Desc</th>
+        
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let prod of products"> -->
+      <tr *ngFor="let stk of outStock">
+        <!-- <th scope="row">ID</th> -->
+        <td>{{stk.outStockName}}</td>
+        <td>0</td>
+        <td>{{stk.outStockCategory}}</td>
+        <!-- <td>Price</td> -->
+        <td class="prod-desc-tab">{{stk.outStockDescription}}</td>
+        <!-- <td><button class="btn btn-warning" [routerLink]="['editProduct', prod.id]">Edit</button></td> -->
+        <!-- <td><button class="btn btn-warning" >Edit</button></td> -->
+        <!-- <td><button class="btn btn-danger" (click)="deleteProduct(prod.id)">Delete</button></td> -->
+        <td><button type="button" class="btn btn-danger" (click)="delOutStock(stk.outStockId)">Remove From List</button></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+</div>
+</div>
+<router-outlet></router-outlet>

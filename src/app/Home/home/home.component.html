@@ -1,0 +1,41 @@
+
+<app-navbar></app-navbar>
+<div *ngIf="products.length>0" class="Home-Main-div">
+
+    <h3>Product List</h3>
+    <br>
+    <br>
+
+<div class="Home-table">
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">P.Id</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+        <th scope="col">Desc</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of products">
+        <th scope="row">{{prod.id}}</th>
+        <td>{{prod.name}}</td>
+        <td>{{prod.quantity}}</td>
+        <td>{{prod.category}}</td>
+        <td>{{prod.price}}</td>
+        <td class="prod-desc-tab">{{prod.description}}</td>
+        <td><button class="btn btn-warning" [routerLink]="['/editProduct', prod.id]">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="deleteProduct(prod.id)">Delete</button></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+</div>
+</div>
+<router-outlet></router-outlet>

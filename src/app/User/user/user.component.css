@@ -1,0 +1,9 @@
+.UserList-Main-div{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.UserListAddButton{
+    position: absolute;
+    right: 20px;
+    top: 110px;
+}

@@ -1,0 +1,51 @@
+
+<app-navbar></app-navbar>
+<!-- <div *ngIf="products.length>0" class="Home-Main-div"> -->
+<div *ngIf="newUser.length>0"  class="UserList-Main-div">
+
+    <h3>User List</h3>
+    <br>
+    <br>
+
+    <button type="button" routerLink="/addUserList" class="btn btn-primary UserListAddButton">Add User</button>
+
+<div class="Home-table">
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <!-- <th scope="col">P.Id</th> -->
+        <th scope="col">User Id</th>
+        <th scope="col">User Name</th>
+        <th scope="col">User Mob</th>
+        <!-- <th scope="col">Price</th> -->
+        <th scope="col">User Password</th>
+        
+        <th scope="col"></th>
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of newUser">
+      <!-- <tr > -->
+        <!-- <th scope="row">ID</th> -->
+        <td>{{user.userId}}</td>
+        <td>{{user.userName}}</td>
+        <td>{{user.mobile}}</td>
+        <!-- <td>Price</td> -->
+        <td class="prod-desc-tab">{{user.password}}</td>
+        <!-- <td><button class="btn btn-warning" [routerLink]="['editProduct', prod.id]">Edit</button></td> -->
+        <!-- <td><button class="btn btn-warning" >Edit</button></td> -->
+        <!-- <td><button class="btn btn-danger" (click)="deleteProduct(prod.id)">Delete</button></td> -->
+        <!-- <td><button type="button" class="btn btn-danger" (click)="delOutStock(stk.outStockId)">Remove From List</button></td> -->
+        <td><button type="button" [routerLink]="['/updateUserList', user.userId]" class="btn btn-warning">Edit</button></td>
+        <td><button type="button" (click)="deleteUser(user.userId)" class="btn btn-danger">Remove From List</button></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+</div>
+</div>
+<router-outlet></router-outlet>

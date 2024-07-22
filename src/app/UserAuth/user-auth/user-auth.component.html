@@ -1,0 +1,59 @@
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                    <img src="https://ipssi.com/gifs/intelliplanner.gif"
+                      style="width: 185px;" alt="logo">
+                    <h4 class="mt-1 mb-5 pb-1">   </h4>
+                  </div>
+  
+                  <form #LoginForm="ngForm" (ngSubmit)="getIDPassword(LoginForm.value)">
+                    <h3 class="Auth-Heading">Store Management</h3>
+                    <p>Please login to your account</p>
+                    <br>
+  
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="form2Example11">Username</label>
+                      <input type="email" id="form2Example11" class="form-control"
+                        placeholder="Phone number or email address" name="UserName" ngModel />
+                    </div>
+  
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="form2Example22">Password</label>
+                      <input type="password" id="form2Example22" class="form-control" name="UserPassword" ngModel/>
+                    </div>
+                    <br>
+  
+                    <div class="text-center pt-1 mb-5 pb-1">
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg  mb-3 login-Button" type="submit">Log
+                        in</button>
+                      <!-- <a class="text-muted" href="#!">Forgot password?</a> -->
+                    </div>
+  
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                      <!-- <p class="mb-0 me-2">Don't have an account?</p> -->
+                      <!-- <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Create new</button> -->
+                    </div>
+  
+                  </form>
+  
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">We are more than just a Software company</h4>
+                  <p class="small mb-0">We, IntelliPlanner Software System India Pvt. Ltd. are a global software company specializing in providing vehicle movement control system and automations. In the past through our Indian operations (registered office in New Delhi and development center in Noida) we have successfully deployed GPS enabled Vehicle Tracking Services, truck dispatch systems involving wide variety of equipments like dumpers, shovels, tippers, hydras, PE Loaders etc. in industries, taxies, production plants, mines and on road vehicles in India and abroad. We have also executed Gate In and Gate out automation systems, Asset and Inventory tracking, Integrated Security and Access management solutions using RFID and other accessories.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
