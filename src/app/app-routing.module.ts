@@ -11,7 +11,7 @@ import { AddUserComponent } from './User/add-user/add-user.component';
 import { UpdateUserComponent } from './User/update-user/update-user.component';
 
 const routes: Routes = [
-  {path:'', component:UserAuthComponent},
+  {path:'/', component:UserAuthComponent},
   {path:'home', component:HomeComponent},
   {path:'addProduct', component:AddProductComponent},
   {path:'editProduct/:id', component:EditProductComponent},
