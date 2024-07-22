@@ -20,6 +20,7 @@ const routes: Routes = [
   {path:'userList', component:UserComponent},
   {path:'addUserList', component:AddUserComponent},
   {path:'updateUserList/:id', component:UpdateUserComponent},
+  { path: '**', redirectTo: '' }  // Wildcard route for handling unknown paths
   
 ];
 
