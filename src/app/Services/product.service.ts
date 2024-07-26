@@ -11,20 +11,23 @@ export class ProductService {
 
   private baseUrl: string = environment.baseUrl;
 
+  fetchUserId:any;
 
-  constructor(private http:HttpClient) { }
-
-  getProducts():Observable<Product[]>{
-      return this.http.get<Product[]>(`${this.baseUrl}/products`);
+  constructor(private http: HttpClient) { 
+    this.fetchUserId =localStorage.getItem('Store_mgmt_userId')
   }
 
-  addProduct(product:Product):Observable<Product>{
-    const headers = new HttpHeaders({"Content-Type":"application/json"})
-    return this.http.post<Product>(`${this.baseUrl}/addProduct`,product, {headers})
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.baseUrl}/products/user/${this.fetchUserId}`);
   }
 
-  deleteProduct(id: number):Observable<String> {
-    return this.http.delete<String>(`${this.baseUrl}/deleteProduct/${id}`);
+  addProduct(product: Product, userId: number): Observable<Product> {
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+    return this.http.post<Product>(`${this.baseUrl}/addProduct/user/${userId}`, product, { headers });
+  }
+
+  deleteProduct(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.baseUrl}/deleteProduct/${id}/user/${this.fetchUserId}`);
   }
 
   getProductById(id: number): Observable<Product> {
@@ -33,7 +36,7 @@ export class ProductService {
 
   editProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
-    return this.http.put<Product>(`${this.baseUrl}/updateProduct/${product.id}`, product, { headers });
+    return this.http.put<Product>(`${this.baseUrl}/updateProduct/${product.productId}/user/${this.fetchUserId}`, product, { headers });
   }
 
 }

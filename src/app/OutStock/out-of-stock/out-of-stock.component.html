@@ -2,7 +2,7 @@
 <app-navbar></app-navbar>
 <!-- <div *ngIf="products.length>0" class="Home-Main-div"> -->
   <button type="button" routerLink="/addOutStock" class="btn btn-primary outStockAddButton">Add to List</button>
-<div *ngIf="outStock.length>0"  class="OutStock-Main-div">
+<div *ngIf="outStock.length>0; else noOutstockTemplate"  class="OutStock-Main-div">
 
     <h3>Out Of Stocks</h3>
     <br>
@@ -45,4 +45,8 @@
 
 </div>
 </div>
+
+<ng-template #noOutstockTemplate>
+  <h3 style="margin: auto; width: 50vw; margin-top: 30px;">No OutStock Product to show!! Add Product</h3>
+</ng-template>
 <router-outlet></router-outlet>

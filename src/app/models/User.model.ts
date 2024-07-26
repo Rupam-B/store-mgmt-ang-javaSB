@@ -3,4 +3,5 @@ export interface User{
     userName:String;
     mobile:number;
     password:String;
+    products:any[];
 }

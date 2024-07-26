@@ -13,9 +13,12 @@ export class HomeComponent implements OnInit {
 
   products : Product[]=[];
 
+  fetchUserId : any;
+
   constructor (private productService:ProductService , private router:Router) {}
 
   ngOnInit(): void {
+    
     this.loadProducts();
   }
 
@@ -23,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.productService.getProducts().subscribe(
       (data : Product[]) =>{
         this.products=data;
-        // console.log(data);
+        console.log(data);
       },
       (error)=>{
         console.log('There was an error fetching the products!', error)
@@ -37,14 +40,17 @@ export class HomeComponent implements OnInit {
         () => {
           // this.products = this.products.filter(product => product.id !== id);
           setTimeout(() => {
-            window.location.reload();
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['home']);
+            });
           }, 500);
         },
         (error) => {
           console.error('There was an error deleting the product!', error);
           setTimeout(() => {
-            window.location.reload();
-            // this.router.navigate(['home'])
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['home']);
+            });
           }, 500);
         }
       );

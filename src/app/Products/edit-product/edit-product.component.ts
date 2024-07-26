@@ -13,7 +13,7 @@ export class EditProductComponent implements OnInit {
 
   productId: any;
   product: Product = {
-    id: 0,
+    productId: 0,
     name: '',
     description: '',
     category: '',

@@ -20,12 +20,11 @@ const routes: Routes = [
   {path:'userList', component:UserComponent},
   {path:'addUserList', component:AddUserComponent},
   {path:'updateUserList/:id', component:UpdateUserComponent},
-  // { path: '**', redirectTo: 'authComp' }  
-  
+  // {path: '**', redirectTo: 'authComp'}  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation:'reload'}) ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

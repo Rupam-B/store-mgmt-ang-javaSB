@@ -17,7 +17,8 @@ export class UpdateUserComponent implements OnInit{
     userId:0,
     userName:'',
     mobile:0,
-    password:''
+    password:'',
+    products:[]
   }
 
   ngOnInit(): void {

@@ -14,7 +14,8 @@ export class AddUserComponent {
     userId:0,
     userName:'',
     mobile:0,
-    password:''
+    password:'',
+    products:[]
   }
 
   constructor(private useService:UsersService , private route:Router){}

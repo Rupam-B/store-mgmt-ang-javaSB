@@ -16,6 +16,7 @@ export class UserAuthComponent implements OnInit {
 
   ngOnInit(): void {
       this.getUsers();
+      console.log(this.newUser)
   }
 
   constructor(private router:Router, private useService:UsersService){}
@@ -26,6 +27,7 @@ export class UserAuthComponent implements OnInit {
       this.findUser=this.newUser.find((user)=>user.userName===data.UserName)
 
       if(this.findUser&&this.findUser.userName===data.UserName&&this.findUser.password===data.UserPassword){
+        localStorage.setItem('Store_mgmt_userId', this.findUser.userId.toString());
         alert("Succesful Login")
         this.router.navigate(['home'])
       }
@@ -40,10 +42,11 @@ export class UserAuthComponent implements OnInit {
 
 
   getUsers():void{
-    this.useService.getusers().subscribe(
+    this.useService.getusers()
+    .subscribe(
       (data:User[])=>{
         this.newUser=data;
-        // console.log(this.newUser)
+        console.log(this.newUser)
       }
     )
   }

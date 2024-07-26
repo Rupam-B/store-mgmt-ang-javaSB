@@ -12,10 +12,15 @@ export class UsersService {
 
   private baseUrl: string = environment.baseUrl;
 
+  // anyUSer:any;
+
   constructor(private http:HttpClient) { }
 
   getusers (): Observable<User[]>{
+    // getusers (): void{
    return this.http.get<User[]>(`${this.baseUrl}/users`)
+  //  this.anyUSer = this.http.get<User[]>(`${this.baseUrl}/users`);
+  //  console.log(this.anyUSer, "Thios is consoling to check")
   }
   getuserById (id:any): Observable<User>{
     return this.http.get<User>(`${this.baseUrl}/users/${id}`)
@@ -26,7 +31,7 @@ export class UsersService {
 
   addUser(newUser:User):Observable<User>{
     const headers = new HttpHeaders({"Content-Type":"application/json"})
-    return this.http.post<User>("${this.baseUrl}/addUser", newUser, {headers})
+    return this.http.post<User>(`${this.baseUrl}/addUser`, newUser, {headers})
   }
 
   editUser(newUser:User):Observable<User>{

@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/Services/product.service';
 export class AddProductComponent {
 
   newProduct: Product = {
-    id: 0,
+    productId: 0,
     name: '',
     price: 0,
     quantity: 0,
@@ -19,16 +19,19 @@ export class AddProductComponent {
     category: ''
   };
 
-  constructor(private productService: ProductService, private router: Router) {}
+  userId: any; 
+
+  constructor(private productService: ProductService, private router: Router) {
+    this.userId = localStorage.getItem("Store_mgmt_userId")
+  }
 
   getProduct(prod: any) {
-    if (prod.ProductName && prod.ProductDescription && prod.ProductCategory && prod.ProductQuantity&&prod.ProductQuantity) {
+    if (prod.ProductName && prod.ProductDescription && prod.ProductCategory && prod.ProductQuantity && prod.ProductPrice) {
       this.newProduct.name = prod.ProductName;
       this.newProduct.description = prod.ProductDescription;
       this.newProduct.category = prod.ProductCategory;
       this.newProduct.quantity = prod.ProductQuantity;
       this.newProduct.price = prod.ProductPrice;
-
 
       this.addProduct();
     } else {
@@ -37,14 +40,14 @@ export class AddProductComponent {
   }
 
   addProduct(): void {
-    this.productService.addProduct(this.newProduct).subscribe(
+    this.productService.addProduct(this.newProduct, this.userId).subscribe(
       (data: Product) => {
         // Navigate back to home or wherever you want after successfully adding the product
         this.router.navigate(["home"]);
 
         // Optionally clear the form after successful submission
         this.newProduct = {
-          id: 0,
+          productId: 0,
           name: '',
           price: 0,
           quantity: 0,

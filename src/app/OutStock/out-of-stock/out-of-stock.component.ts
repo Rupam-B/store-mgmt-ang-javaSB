@@ -1,6 +1,7 @@
 import { Component ,OnInit } from '@angular/core';
 import { OutStock } from 'src/app/models/OutStock.model';
 import { OutStockService } from 'src/app/Services/out-stock.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class OutOfStockComponent implements OnInit {
 
   outStock : OutStock []=[]
 
-  constructor(private outStockService:OutStockService){}
+  constructor(private outStockService:OutStockService, private router:Router){}
 
   ngOnInit(): void {
       this.getallOutStocks();
@@ -39,12 +40,16 @@ export class OutOfStockComponent implements OnInit {
       this.outStockService.removeOutStock(id).subscribe(
         ()=>{
           setTimeout(() => {
-            window.location.reload();
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['outStock']);
+            });
           }, 500);
         },
         (error)=>{
           setTimeout(() => {
-            window.location.reload();
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['outStock']);
+            });
           }, 500);
           console.log("Error Deleting Product from Out of Stock" , error)
         }
