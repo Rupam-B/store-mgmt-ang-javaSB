@@ -5,4 +5,15 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+
+  fetchUserName:any;
+
+  constructor(){
+    this.fetchUserName = localStorage.getItem('Store_mgmt_userName')  
+  }
+
+  isAdmin(): boolean {
+    return this.fetchUserName === 'admin@ipssi';
+  }
+}

@@ -11,31 +11,58 @@ export class ProductService {
 
   private baseUrl: string = environment.baseUrl;
 
-  fetchUserId:any;
+  private fetchUserId: string | null;
+  private fetchUserToken: string | null;
 
   constructor(private http: HttpClient) { 
     this.fetchUserId =localStorage.getItem('Store_mgmt_userId')
+    this.fetchUserToken =localStorage.getItem('ipssiStorejwt')
   }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/products/user/${this.fetchUserId}`);
+    if (!this.fetchUserId || !this.fetchUserToken) {
+      throw new Error('User ID or token is missing');
+    }
+
+    // console.log(this.fetchUserToken)
+
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
+
+    return this.http.get<Product[]>(`${this.baseUrl}/products/user/${this.fetchUserId}`, { headers });
   }
 
   addProduct(product: Product, userId: number): Observable<Product> {
-    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
     return this.http.post<Product>(`${this.baseUrl}/addProduct/user/${userId}`, product, { headers });
   }
 
   deleteProduct(id: number): Observable<string> {
-    return this.http.delete<string>(`${this.baseUrl}/deleteProduct/${id}/user/${this.fetchUserId}`);
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
+    return this.http.delete<string>(`${this.baseUrl}/deleteProduct/${id}/user/${this.fetchUserId}`, {headers});
   }
 
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/products/${id}`);
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
+    return this.http.get<Product>(`${this.baseUrl}/products/${id}`, {headers});
   }
 
   editProduct(product: Product): Observable<Product> {
-    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
     return this.http.put<Product>(`${this.baseUrl}/updateProduct/${product.productId}/user/${this.fetchUserId}`, product, { headers });
   }
 

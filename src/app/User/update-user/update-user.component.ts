@@ -9,56 +9,54 @@ import { Router } from '@angular/router';
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.css']
 })
-export class UpdateUserComponent implements OnInit{
+export class UpdateUserComponent implements OnInit {
 
-  presentUId : any;
+  presentUId: any;
 
-  presentUser : User ={
-    userId:0,
-    userName:'',
-    mobile:0,
-    password:'',
-    products:[]
+  presentUser: User = {
+    userId: 0,
+    userName: '',
+    mobile: 0,
+    password: '',
+    products: []
   }
+
+  constructor(private useService: UsersService, private actRoute: ActivatedRoute, private route: Router) {}
 
   ngOnInit(): void {
-      this.presentUId=this.actRoute.snapshot.paramMap.get('id')
-      this.getUserDetails();
+    this.presentUId = this.actRoute.snapshot.paramMap.get('id');
+    this.getUserDetails();
   }
 
-  constructor(private useService:UsersService , private actRoute:ActivatedRoute, private route:Router){}
-
-  getUserDetails():void{
+  getUserDetails(): void {
     this.useService.getuserById(this.presentUId).subscribe(
-      (data: User)=>{
-        this.presentUser=data;
-        console.log(this.presentUser, "Getting User")
+      (data: User) => {
+        this.presentUser = data;
+        // console.log(this.presentUser, "Getting User");
       },
-      (error)=>{
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
-
-  updateUser (data:any):void{
-    if(data.userName&&data.mobile&&data.password){
+  updateUser(form: any): void {
+    const passwordInput = (document.getElementById('form3Example4cg') as HTMLInputElement).value;
+    // console.log(passwordInput)
+    // console.log(form.userName)
+    if (form.userName && form.mobile && passwordInput) {
+      this.presentUser.password = passwordInput;
       this.useService.editUser(this.presentUser).subscribe(
-        ()=>{
-          alert("User Updated Succesfully")
-          this.route.navigate(["/userList"])
+        () => {
+          alert("User Updated Successfully");
+          this.route.navigate(["/userList"]);
         },
-        (error)=>{
-          console.log(error)
+        (error) => {
+          console.log(error);
         }
-      )
-    }
-    else{
-      alert("Please Fill All details")
+      );
+    } else {
+      alert("Please Fill All details");
     }
   }
-
-
-
-
 }

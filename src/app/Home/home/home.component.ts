@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.productService.getProducts().subscribe(
       (data : Product[]) =>{
         this.products=data;
-        console.log(data);
+        // console.log(data);
       },
       (error)=>{
         console.log('There was an error fetching the products!', error)

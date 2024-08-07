@@ -1,7 +1,7 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/User.model';
-import { UsersService } from 'src/app/Services/users.service';
+import { AuthService } from 'src/app/Services/auth.service';
+import { Auth } from 'src/app/models/AuthModel';
 
 @Component({
   selector: 'app-user-auth',
@@ -10,45 +10,36 @@ import { UsersService } from 'src/app/Services/users.service';
 })
 export class UserAuthComponent implements OnInit {
 
-  newUser :User[] =[]
-
-  findUser :User | undefined;
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
-      this.getUsers();
-      console.log(this.newUser)
+    // Initialization code here if needed
   }
 
-  constructor(private router:Router, private useService:UsersService){}
+  getIDPassword(data: any): void {
+    if (data.UserName && data.UserPassword) {
+      const authData: Auth = {
+        username: data.UserName,
+        password: data.UserPassword
+      };
 
-  getIDPassword(data:any){
-    if(data.UserName&& data.UserPassword){
-
-      this.findUser=this.newUser.find((user)=>user.userName===data.UserName)
-
-      if(this.findUser&&this.findUser.userName===data.UserName&&this.findUser.password===data.UserPassword){
-        localStorage.setItem('Store_mgmt_userId', this.findUser.userId.toString());
-        alert("Succesful Login")
-        this.router.navigate(['home'])
-      }
-      else{
-        alert('wrong Credentials')
-      }
+      this.authService.authLogin(authData).subscribe(
+        response => {
+          alert("Succesful Login")
+          console.log('Login successful', response);
+          localStorage.setItem('ipssiStorejwt', response.jwt);
+          localStorage.setItem('Store_mgmt_userId', response.userId.toString());
+          localStorage.setItem('Store_mgmt_userName', response.userName.toString());
+          this.router.navigate(['home']);
+        },
+        error => {
+          console.error('Login failed', error);
+          alert('Wrong credentials');
+        }
+      );
+    } else {
+      alert("Fill all details");
     }
-    else{
-      alert("Fill all details")
-    }
   }
-
-
-  getUsers():void{
-    this.useService.getusers()
-    .subscribe(
-      (data:User[])=>{
-        this.newUser=data;
-        console.log(this.newUser)
-      }
-    )
-  }
-
 }
+

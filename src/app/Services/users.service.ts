@@ -13,29 +13,50 @@ export class UsersService {
   private baseUrl: string = environment.baseUrl;
 
   // anyUSer:any;
+  fetchUserToken :any;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { 
+    this.fetchUserToken =localStorage.getItem('ipssiStorejwt')
+  }
 
   getusers (): Observable<User[]>{
-    // getusers (): void{
-   return this.http.get<User[]>(`${this.baseUrl}/users`)
-  //  this.anyUSer = this.http.get<User[]>(`${this.baseUrl}/users`);
-  //  console.log(this.anyUSer, "Thios is consoling to check")
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
+   return this.http.get<User[]>(`${this.baseUrl}/users`, {headers});
   }
+
   getuserById (id:any): Observable<User>{
-    return this.http.get<User>(`${this.baseUrl}/users/${id}`)
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
+    return this.http.get<User>(`${this.baseUrl}/users/${id}`, {headers})
    }
+
+
   deleteusers (id:any):Observable<String>{
-   return this.http.delete<String>(`${this.baseUrl}/delUser/${id}`)
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
+   return this.http.delete<String>(`${this.baseUrl}/delUser/${id}`,{headers})
   }
 
   addUser(newUser:User):Observable<User>{
-    const headers = new HttpHeaders({"Content-Type":"application/json"})
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
     return this.http.post<User>(`${this.baseUrl}/addUser`, newUser, {headers})
   }
 
   editUser(newUser:User):Observable<User>{
-    const headers = new HttpHeaders({"Content-Type":"application/json"})
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.fetchUserToken}`
+    });
     return this.http.put<User>(`${this.baseUrl}/updateUser/${newUser.userId}`, newUser, {headers})
   }
 }
