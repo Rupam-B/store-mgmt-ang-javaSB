@@ -10,7 +10,8 @@
     }
 
     .login-Button{
-        background-color: rgb(4, 57, 126);
+        background-color: #04397e;
+        /* min-height: 35px; */
     }
     .Auth-Heading{
         font-weight: bolder;
