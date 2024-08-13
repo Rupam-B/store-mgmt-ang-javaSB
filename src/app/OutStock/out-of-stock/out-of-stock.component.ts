@@ -16,6 +16,7 @@ export class OutOfStockComponent implements OnInit {
   constructor(private outStockService:OutStockService, private router:Router){}
 
   ngOnInit(): void {
+    this.outStockService.init();
       this.getallOutStocks();
   }
 

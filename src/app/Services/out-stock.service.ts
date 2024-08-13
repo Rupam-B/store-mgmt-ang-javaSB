@@ -11,12 +11,19 @@ export class OutStockService {
 
   private baseUrl: string = environment.baseUrl;
 
-  fetchUserId :any;
-  fetchUserToken :any;
+  private fetchUserId: string | null = null;
+  private fetchUserToken: string | null = null;
 
-  constructor(private http:HttpClient) { 
-    this.fetchUserId = localStorage.getItem('Store_mgmt_userId')
-    this.fetchUserToken =localStorage.getItem('ipssiStorejwt')
+  constructor(private http:HttpClient) { }
+
+  init(): void {
+    this.fetchUserId = localStorage.getItem('Store_mgmt_userId');
+    this.fetchUserToken = localStorage.getItem('ipssiStorejwt');
+
+    if (!this.fetchUserId || !this.fetchUserToken) {
+      console.error('User ID or token is missing');
+      alert('User ID or token is missing');
+    }
   }
 
   getOutStocks():Observable<OutStock[]>{
